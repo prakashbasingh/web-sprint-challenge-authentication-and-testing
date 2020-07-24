@@ -15,4 +15,9 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 server.use('/api/jokes', authenticate, jokesRouter);
 
+
+server.get("/", (req, res) => {
+    res.json({ api: "this is Sprint day of third week backend session. Server is up and running" });
+  });
+
 module.exports = server;
