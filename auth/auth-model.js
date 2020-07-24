@@ -3,16 +3,11 @@ const db = require("../database/dbConfig.js")
 
 
 module.exports = {
-    isValid,
     add,
     find,
     findBy,
     findById,
 }   
-
-function isValid(user) {
-    return Boolean(user.username && user.password && typeof user.password === "string" )
-}
 
 async function add(user){
     try {
@@ -27,6 +22,8 @@ async function add(user){
 
 function find(){
     return db("users")
+        .select("id", "username")
+        .orderBy("id")
 }
 
 function findBy (filter) {
