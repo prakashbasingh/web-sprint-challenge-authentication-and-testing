@@ -4,24 +4,27 @@
 */
 const jwt = require("jsonwebtoken");
 
+
 module.exports = (req, res, next) => {
-  //adding codes to verify users are logged in
+  // here adding code to verify users are logged in
   const token = req.headers.authorization;
-  const secret = process.env.JWT_SECRET || "Keeping It Safe, Keeping It Secret???";
+  const secret = process.env.JWT_SECRET || "is it secret, is it safe?";
 
-  if(token) {
-    jwt.verify(token, secret, (error, decodedToken) => {
-      if(error) {
-        //something wrong with token
-        res.status(401).json({ error, you: "shall not pass!!!"})
-      } else {
-        //if token is good we can see the data inside the decodedToken
-        req.jwt = decodedToken;
 
-        next();
-      }
+  if (token) {
+    jwt.verify(token, secret, (err, decodedToken) => {
+        if (err) {
+            // something wrong with the token
+            res.status(401).json({ you: "can't touch this!" });
+        } else {
+            // token is good we can see the data inside the decodedToken
+            req.jwt = decodedToken;
+
+            next();
+        }
     });
   } else {
-    res.status(401).json({ you: "can not touch this" });
+    res.status(401).json({ you: "shall not pass!" });
   }
+ 
 };
