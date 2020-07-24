@@ -8,12 +8,10 @@ module.exports = {
     find,
     findBy,
     findById,
-}
-
-
+}   
 
 function isValid(user) {
-    return Boolean(user.username && user.password && typeof isSecureContext.password === "string" )
+    return Boolean(user.username && user.password && typeof user.password === "string" )
 }
 
 async function add(user){

@@ -15,6 +15,7 @@ module.exports = (req, res, next) => {
         //if token is invalid
         res.status(401).json({ error, you: "shall not pass!!!"})
       } else {
+        //if token is good we can see the data inside the decodedToken
         req.jwt = decodedToken;
 
         next()
